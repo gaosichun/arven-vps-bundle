@@ -6,9 +6,10 @@ BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vp
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
+main(){
 
 log "1/7 Docker"
-if ! command -v docker >/dev/null 2>&1; then curl -fsSL https://get.docker.com | sh; fi
+if ! command -v docker >/dev/null 2>&1; then curl -fsSL https://get.docker.com -o /tmp/get-docker.sh && sh /tmp/get-docker.sh </dev/null; fi
 docker compose version >/dev/null 2>&1 || apt-get install -y docker-compose-plugin
 systemctl enable --now docker >/dev/null 2>&1 || true
 
@@ -53,10 +54,10 @@ docker compose build app
 log "6/7 Start database + schema + data import"
 docker compose up -d db
 for i in $(seq 1 60); do docker compose exec -T db pg_isready -U arven -d arven >/dev/null 2>&1 && break; sleep 2; done
-docker compose run --rm --no-deps -T app node node_modules/prisma/build/index.js db push --skip-generate --schema=prisma/postgres/schema.prisma
+docker compose run --rm --no-deps -T -u root app node node_modules/prisma/build/index.js db push --skip-generate --schema=prisma/postgres/schema.prisma
 cnt=$(docker compose exec -T db psql -U arven -d arven -tAc 'SELECT count(*) FROM "Admin"' 2>/dev/null | tr -d '[:space:]' || echo 0)
 if [ "${cnt:-0}" = "0" ] || [ "${FORCE_IMPORT:-0}" = "1" ]; then
-  docker compose run --rm --no-deps -T app node scripts/db-import-sqlite.mjs prisma/seeded.db --force
+  docker compose run --rm --no-deps -T -u root app node scripts/db-import-sqlite.mjs prisma/seeded.db --force
 else
   echo "DB already has $cnt admins - skipping import (FORCE_IMPORT=1 to re-import TEST data)"
 fi
@@ -70,3 +71,5 @@ echo "Local check via Caddy: HTTP $code (308 redirect to https is expected)"
 echo
 echo "DONE. Open https://arvenoutdoor.com  |  admin: https://arvenoutdoor.com/admin  (admin@demo.com / Admin123!)"
 echo "Logs: cd $DEP && docker compose logs -f app caddy"
+}
+main "$@" </dev/null
