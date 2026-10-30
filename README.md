@@ -6,7 +6,7 @@ One command on the VPS as root:
 
 If raw.githubusercontent.com serves a stale `main` cache, use the pinned commit (same installer body; `BUNDLE_BASE` already points here for parts):
 
-    curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/e69b62027c783b100513b07e4e30a6b53845711d/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/e69b62027c783b100513b07e4e30a6b53845711d bash
+    curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/927ba7e5dc821003f1fe6d40735ae218b11eadd6/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/927ba7e5dc821003f1fe6d40735ae218b11eadd6 bash
 
 - Installs Docker if missing, unpacks source into /opt/arven-app, generates `deploy/vps/.env`
   (random POSTGRES_PASSWORD / JWT_SECRET, created on the VPS, never committed).
@@ -18,4 +18,6 @@ If raw.githubusercontent.com serves a stale `main` cache, use the pinned commit 
 
 Re-deploy: run the same command again (keeps .env and DB data).
 
-Installer pin: `BUNDLE_BASE` defaults to commit `e69b62027c783b100513b07e4e30a6b53845711d` so raw CDN cache on branch `main` cannot mix old/new part blobs. Override with `BUNDLE_BASE=...` if needed. Re-publish updates the pin.
+Installer pin: `BUNDLE_BASE` defaults to commit `927ba7e5dc821003f1fe6d40735ae218b11eadd6` so raw CDN cache on branch `main` cannot mix old/new part blobs. Override with `BUNDLE_BASE=...` if needed. Re-publish updates the pin.
+
+This release: submitter receipt emails for inquiry + dealer apply (and dealer approved → applicant).
