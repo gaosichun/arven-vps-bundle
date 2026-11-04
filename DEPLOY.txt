@@ -1,17 +1,22 @@
-ARVEN admin dashboard onescreen tip — 2026-11-05 Asia/Shanghai
+ARVEN tip: admin dealer place/address search → lat/lng (Amap preferred, Nominatim fallback)
 
-SoT: /workspace/arven-recovered @ a3f7517 (includes eec432f dash onescreen + tip-notice removal)
-src.tgz sha256: 8f88368bca5ec2959e1a78baae661470b53864445e621740acba17bbd30ef0d6
+SoT: /workspace/arven-recovered @ 5d56ff7 (Amap) / HEAD a3f7517
+Tip SHA: (set after i.sh push)
+BUNDLE_BASE commit: fc691156fb814b30cb909ced94e55a5583c131e9
+src.tgz sha256: 98252e00430877c2eedd50d7aba324681f585ce7f6843341f73a13c5a5ba3f4b
+Parts path: dealer-geocode/bundle/p00..p09 + manifest.txt
 
-Change:
-- Remove dashboard seed/demo visitor notice tip (footerNote + refresh Button)
-- Fit analytics dashboard to ~1280x800 one viewport (max-height:820 media query)
-- install.sh DONE echo has no demo credentials / passwords
+Install (fresh VPS):
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/<TIP_SHA>/i.sh | bash
 
-Live VPS: KEEP-DB overlay + docker compose build/up (no volume wipe).
-Staging: Vercel arven-trade-site target=staging.
+KEEP-DB overlay (existing prod — preferred):
+  # source already at /opt/arven-app with geocode route sha1 162ec91e…
+  cd /opt/arven-app/deploy/vps && docker compose build app && docker compose up -d --no-deps app
+  # do NOT wipe postgres volumes / do NOT re-import seeded.db
 
-BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
-Tip SHA (i.sh pin): 50900d3a3a5ec8fcf02549616c3523aff2441dcf
+Config:
+  Set AMAP_WEB_KEY env or admin Setting amap_web_key (secret). Without key, Nominatim is used.
+  No passwords in this tip.
 
-No passwords in this tip.
+Smoke:
+  curl -sI "https://<host>/api/admin/geocode?q=shanghai"   # expect 401 (auth), not 404

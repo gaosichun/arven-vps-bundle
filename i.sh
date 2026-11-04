@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/d473ae69aa287136c42450df7ca1c520ca624560}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/fc691156fb814b30cb909ced94e55a5583c131e9/dealer-geocode}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
