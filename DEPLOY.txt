@@ -1,24 +1,16 @@
-ARVEN C12 App/Software tip — 2026-11-04 Asia/Shanghai
+ARVEN About gallery caption-hide tip — 2026-11-04 Asia/Shanghai
 
-SoT commit: aa5e32fce41d00e26ea5d2d9fa80ff6ac92af7a2
-src.tgz sha256: 476b6cc27ba0419de4dadd2e7be50c7237165e3a39726b7fd7f9ba4d67061a0d
+src.tgz sha256: 9f6941841daccf532df667c31bb47bb75fd71b312cbad85384bf0de5433545fe
+Parts: see bundle/manifest.txt (23 parts p00-p22)
 
-Fixes (C12):
-- downloads presentCats ALWAYS_SHOW software (empty count OK)
-- EN cats.software = "App / Software"; ZH = "APP/软件"
-- admin-i18n / dictionary resCat.software aligned
+Fix:
+- About page 厂区与办公实景 carousel: remove overlay title/caption labels (e.g. Facility 05)
+- Keep carousel arrows + dots; titles remain only in img alt / settings data
 
-Also previously live: about+contact+newsletter (see history).
+Live VPS redeployed via scp + docker compose build/up (KEEP-DB).
 
-Live VPS already redeployed via scp + docker compose build/up --no-deps (KEEP-DB).
-Smoke: https://arvenoutdoor.com/en/downloads sidebar shows "App / Software".
+BUNDLE_BASE (parts): ca2a1c7ef27b90deaca593e07230ffce1eddf339
+Tip SHA (i.sh pin): 9d45e6704f8c3888c1062b3b4d3e592462c5f5ee
 
-Tip SHA (SoT / this note): aa5e32fce41d00e26ea5d2d9fa80ff6ac92af7a2
-Prior install oneliner (about tip bundle still on main until full C12 bundle parts pushed):
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/10a3dbe98bcb0c95fcc43c8960941321de555fa0/i.sh | bash
-
----
-Prior about+contact tip:
-src.tgz sha256: 86186d052fc7c24a9518b05eb9ae9d0c48cceda33771393ef887281c180dd102
-Tip SHA (i.sh pin): 10a3dbe98bcb0c95fcc43c8960941321de555fa0
-BUNDLE_BASE: 89af21d3e5f432a0cf675d55ab0508917a3be12c
+Oneliner:
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/9d45e6704f8c3888c1062b3b4d3e592462c5f5ee/i.sh | bash
