@@ -1,17 +1,17 @@
-ARVEN admin Content BY PAGE tip — 2026-11-05 Asia/Shanghai
+ARVEN admin dashboard onescreen tip — 2026-11-05 Asia/Shanghai
 
-SoT: /workspace/arven-recovered @ 97a5a26 (page-centric Content; Home merges home_*; no 其他语言 list column)
-src.tgz sha256: 45b4c85974979af32efce8f8ab0deab395468d4cc43f8bdb6325ced7b374bbcc
+SoT: /workspace/arven-recovered @ a3f7517 (includes eec432f dash onescreen + tip-notice removal)
+src.tgz sha256: 8f88368bca5ec2959e1a78baae661470b53864445e621740acba17bbd30ef0d6
 
 Change:
-- Admin Content list is by PAGE (not fragment keys); Home editor groups home_hero/film/about/series/partner/usp_*
-- Edit modal: Save all sections; underlying PageContent.key rows unchanged — KEEP-DB safe
-- No passwords in this tip
+- Remove dashboard seed/demo visitor notice tip (footerNote + refresh Button)
+- Fit analytics dashboard to ~1280x800 one viewport (max-height:820 media query)
+- install.sh DONE echo has no demo credentials / passwords
 
-BUNDLE_BASE (parts): 289fff9bfca3e01d87180a9a23e816c940164c11  (bundle-cby/)
-Tip SHA (i.sh pin): PENDING
+Live VPS: KEEP-DB overlay + docker compose build/up (no volume wipe).
+Staging: Vercel arven-trade-site target=staging.
 
-Oneliner:
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/PENDING/i.sh | bash
+BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
+Tip SHA (i.sh pin): 50900d3a3a5ec8fcf02549616c3523aff2441dcf
 
-KEEP-DB: install skips import when Admin count > 0; never FORCE_IMPORT for staging→prod.
+No passwords in this tip.

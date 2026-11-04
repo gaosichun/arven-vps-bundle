@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/289fff9bfca3e01d87180a9a23e816c940164c11}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/d473ae69aa287136c42450df7ca1c520ca624560}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
@@ -15,11 +15,11 @@ systemctl enable --now docker >/dev/null 2>&1 || true
 
 log "2/7 Download source bundle"
 TMP=$(mktemp -d)
-curl -fsSL "$BUNDLE_BASE/bundle-cby/manifest.txt" -o "$TMP/manifest.txt"
+curl -fsSL "$BUNDLE_BASE/bundle/manifest.txt" -o "$TMP/manifest.txt"
 : > "$TMP/b64"
 while read -r part sha; do
   [ -z "$part" ] && continue
-  curl -fsSL "$BUNDLE_BASE/bundle-cby/$part" >> "$TMP/b64"
+  curl -fsSL "$BUNDLE_BASE/bundle/$part" >> "$TMP/b64"
 done < <(grep -v '^sha256 ' "$TMP/manifest.txt")
 base64 -d "$TMP/b64" > "$TMP/src.tgz"
 want=$(awk '/^sha256 /{print $2}' "$TMP/manifest.txt")
@@ -70,6 +70,12 @@ docker compose run --rm --no-deps -T -u root app node scripts/patch-home-about.m
 # KEEP-DB data patch: About page manufacturer copy (replace outdoor-trade/B2B/RFQ)
 echo "[install] patch about manufacturer copy..."
 docker compose run --rm --no-deps -T -u root app node scripts/patch-about-manufacturer.mjs || echo "WARN: about-manufacturer patch failed (non-fatal)"
+# KEEP-DB data patch: FAQ + How-to Videos sample rows (count==0 / upsert by slug)
+log "6d/7 Seed FAQ + how-to video samples (KEEP-DB safe)"
+docker compose run --rm --no-deps -T -u root app node scripts/seed-extra-adjustments.mjs || echo "WARN: seed-extra-adjustments failed (non-fatal)"
+# KEEP-DB: purge paste/deploy-note junk from AuditLog (auth.login.*)
+log "6e/7 Purge junk audit login rows (KEEP-DB safe)"
+docker compose run --rm --no-deps -T -u root app node scripts/patch-audit-garbage.mjs || echo "WARN: patch-audit-garbage failed (non-fatal)"
 
 log "7/7 Start app + Caddy (HTTPS)"
 docker compose up -d
