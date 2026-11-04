@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/abf2b523ef3ac2623d761fc8100843e25bb709df}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/276611b8d8ff3ed95d4f96cf9202ed9f2358d67f}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
@@ -61,6 +61,9 @@ if [ "${cnt:-0}" = "0" ] || [ "${FORCE_IMPORT:-0}" = "1" ]; then
 else
   echo "DB already has $cnt admins - skipping import (FORCE_IMPORT=1 to re-import TEST data)"
 fi
+# KEEP-DB data patch: homepage PRODUCT LINES → product covers (idempotent)
+log "6b/7 Patch homepage category homeCardProductId"
+docker compose run --rm --no-deps -T -u root app node scripts/patch-home-card-products.mjs || echo "WARN: home-card patch failed (non-fatal)"
 
 log "7/7 Start app + Caddy (HTTPS)"
 docker compose up -d
