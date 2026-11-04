@@ -1,1 +1,7 @@
-PLACEHOLDER
+0933876662bfdd748ff0131cffcefcf6  ./src/components/admin/FaqManager.tsx
+438abf5d0c7ebfed06abd5ff02a77328  ./src/app/api/admin/faq/route.ts
+ffc76cfd7fa9272e4e52d893ad30082f  ./src/app/[locale]/support/faq/page.tsx
+a4b5f5d92cf7e688b9c017c2df80c12e  ./src/components/SafeHtml.tsx
+1a4c650bbef51104d10a9d6385558f7b  ./src/lib/sanitize-html.ts
+a3ff7539afa4d94bfeaaa227263c5c33  ./src/lib/admin-i18n/support.ts
+1067cbd419a155603abb6d5c37a9226b  ./src/lib/site-search.ts
