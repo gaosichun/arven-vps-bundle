@@ -2,7 +2,7 @@ ARVEN home About beautify + drop legal-entity labels tip — 2026-11-05 Asia/Sha
 
 src.tgz sha256: 5084247d01cc6ba9784b6910a1507f84d2fe31a9592acc52ff91512ed528184f
 BUNDLE_BASE (parts): a87ad818f6ca420c563c52400f031af860d63b1f
-Tip SHA (i.sh pin): FILL_AFTER_ISH_PUSH
+Tip SHA (i.sh pin): e9cf24c04c00fcafb21ffd741f1a1e806461472c
 
 Fixes:
 - Home About teaser: brand card, accent eyebrow, circular emblem polish
