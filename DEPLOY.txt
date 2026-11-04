@@ -1,22 +1,17 @@
-ARVEN tip: admin dealer place/address search → lat/lng (Amap preferred, Nominatim fallback)
+ARVEN admin Content BY PAGE tip — 2026-11-05 Asia/Shanghai
 
-SoT: /workspace/arven-recovered @ 5d56ff7 (Amap) / HEAD a3f7517
-Tip SHA: e65be128cc6bdb48877682bed5a839aa431889f1
-BUNDLE_BASE commit: fc691156fb814b30cb909ced94e55a5583c131e9
-src.tgz sha256: 98252e00430877c2eedd50d7aba324681f585ce7f6843341f73a13c5a5ba3f4b
-Parts path: dealer-geocode/bundle/p00..p09 + manifest.txt
+SoT: /workspace/arven-recovered @ 97a5a26 (page-centric Content; Home merges home_*; no 其他语言 list column)
+src.tgz sha256: 45b4c85974979af32efce8f8ab0deab395468d4cc43f8bdb6325ced7b374bbcc
 
-Install (fresh VPS):
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/e65be128cc6bdb48877682bed5a839aa431889f1/i.sh | bash
+Change:
+- Admin Content list is by PAGE (not fragment keys); Home editor groups home_hero/film/about/series/partner/usp_*
+- Edit modal: Save all sections; underlying PageContent.key rows unchanged — KEEP-DB safe
+- No passwords in this tip
 
-KEEP-DB overlay (existing prod — preferred):
-  # source already at /opt/arven-app with geocode route sha1 162ec91e…
-  cd /opt/arven-app/deploy/vps && docker compose build app && docker compose up -d --no-deps app
-  # do NOT wipe postgres volumes / do NOT re-import seeded.db
+BUNDLE_BASE (parts): 289fff9bfca3e01d87180a9a23e816c940164c11  (bundle-cby/)
+Tip SHA (i.sh pin): PENDING
 
-Config:
-  Set AMAP_WEB_KEY env or admin Setting amap_web_key (secret). Without key, Nominatim is used.
-  No passwords in this tip.
+Oneliner:
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/PENDING/i.sh | bash
 
-Smoke:
-  curl -sI "https://<host>/api/admin/geocode?q=shanghai"   # expect 401 (auth), not 404
+KEEP-DB: install skips import when Admin count > 0; never FORCE_IMPORT for staging→prod.
