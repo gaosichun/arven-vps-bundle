@@ -1,0 +1,9 @@
+FAQ admin Tabs+rich-text tip — KEEP-DB VPS only
+SoT: /workspace/arven-recovered @ 20f2c1f
+No Vercel. No passwords.
+
+1. scp tip files to VPS /tmp/arven-faq-admin-tabs-tip/
+2. bash /tmp/arven-faq-admin-tabs-tip-keepdb.sh
+3. Smoke: https://arvenoutdoor.com/en/support/faq shows FaqItems
+4. Admin /en/admin/faq has LocaleTabs + NewsRichEditor markers in bundle
+5. docker exec: Admin count and FaqItem count unchanged (KEEP-DB)
