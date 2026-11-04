@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/5ba7c1f7f5718680a04b4c0071db7ffe0f37bf7c}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/9f37b670f994949a4baa1da3abf4720355f1aac0}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
@@ -70,6 +70,12 @@ docker compose run --rm --no-deps -T -u root app node scripts/patch-home-about.m
 # KEEP-DB data patch: About page manufacturer copy (replace outdoor-trade/B2B/RFQ)
 echo "[install] patch about manufacturer copy..."
 docker compose run --rm --no-deps -T -u root app node scripts/patch-about-manufacturer.mjs || echo "WARN: about-manufacturer patch failed (non-fatal)"
+# KEEP-DB data patch: FAQ + How-to Videos sample rows (count==0 / upsert by slug)
+log "6d/7 Seed FAQ + how-to video samples (KEEP-DB safe)"
+docker compose run --rm --no-deps -T -u root app node scripts/seed-extra-adjustments.mjs || echo "WARN: seed-extra-adjustments failed (non-fatal)"
+# KEEP-DB: purge paste/deploy-note junk from AuditLog (auth.login.*)
+log "6e/7 Purge junk audit login rows (KEEP-DB safe)"
+docker compose run --rm --no-deps -T -u root app node scripts/patch-audit-garbage.mjs || echo "WARN: patch-audit-garbage failed (non-fatal)"
 
 log "7/7 Start app + Caddy (HTTPS)"
 docker compose up -d
@@ -78,7 +84,7 @@ docker compose ps
 code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: arvenoutdoor.com' http://127.0.0.1/ || true)
 echo "Local check via Caddy: HTTP $code (308 redirect to https is expected)"
 echo
-echo "DONE. Open https://arvenoutdoor.com  |  admin: https://arvenoutdoor.com/admin  (admin@demo.com / Admin123!)"
+echo "DONE. Open https://arvenoutdoor.com  |  admin: https://arvenoutdoor.com/admin"
 echo "Logs: cd $DEP && docker compose logs -f app caddy"
 }
 main "$@" </dev/null
