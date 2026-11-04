@@ -11,10 +11,10 @@ Fix:
 - KEEP-DB scp+compose on prod; staging Vercel then production; no passwords in DONE
 
 BUNDLE_BASE (parts): b9e6860b87db63661e783b56074640cf424eb2c4 (bundle-vu — includes search FAQ files)
-Tip SHA (i.sh pin): (fill after gh push)
+Tip SHA (i.sh pin): 5bcfb90915237633cddd215776a3e1461b4a7242
 
 Oneliner:
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/<TIP_SHA>/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/b9e6860b87db63661e783b56074640cf424eb2c4 bash
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/5bcfb90915237633cddd215776a3e1461b4a7242/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/b9e6860b87db63661e783b56074640cf424eb2c4 bash
 
 KEEP-DB overlay (preferred on live prod):
   scp FILES → /opt/arven-app/src/...
