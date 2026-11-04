@@ -1,22 +1,17 @@
-ARVEN site search FAQ + How-to Videos tip — 2026-11-04/05 Asia/Shanghai
+ARVEN admin dashboard onescreen tip — 2026-11-05 Asia/Shanghai
 
-src.tgz sha256: 8ed11eab5ee5280791b27c22128cfd623f9132d4e8546f74fe1ed30e07083e11
-SoT commit: 5dd8ba7 feat(search): include FAQ + How-to Videos in site search
-Overlay md5: see FILES.md5 (site-search.ts / search-copy.ts / search/page.tsx / icons.tsx)
+SoT: /workspace/arven-recovered @ a3f7517 (includes eec432f dash onescreen + tip-notice removal)
+src.tgz sha256: 8f88368bca5ec2959e1a78baae661470b53864445e621740acba17bbd30ef0d6
 
-Fix:
-- searchSite includes published FaqItem + HowToVideo
-- /[locale]/search groups: Products, News, Downloads, FAQ, How-to Videos
-- Overlay/page placeholders updated across locales
-- KEEP-DB scp+compose on prod; staging Vercel then production; no passwords in DONE
+Change:
+- Remove dashboard seed/demo visitor notice tip (footerNote + refresh Button)
+- Fit analytics dashboard to ~1280x800 one viewport (max-height:820 media query)
+- install.sh DONE echo has no demo credentials / passwords
 
-BUNDLE_BASE (parts): b9e6860b87db63661e783b56074640cf424eb2c4 (bundle-vu — includes search FAQ files)
-Tip SHA (i.sh pin): (fill after gh push)
+Live VPS: KEEP-DB overlay + docker compose build/up (no volume wipe).
+Staging: Vercel arven-trade-site target=staging.
 
-Oneliner:
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/<TIP_SHA>/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/b9e6860b87db63661e783b56074640cf424eb2c4 bash
+BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
+Tip SHA (i.sh pin): ae7affc68f1908536e089655709764c2d9cc86f5
 
-KEEP-DB overlay (preferred on live prod):
-  scp FILES → /opt/arven-app/src/...
-  cd /opt/arven-app/deploy/vps && docker compose build app && docker compose up -d --no-deps app
-  # Admin count must stay >0; never FORCE_IMPORT
+No passwords in this tip.
