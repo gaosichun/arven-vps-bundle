@@ -1,11 +1,16 @@
-ARVEN home About beautify + drop legal-entity labels tip — 2026-11-05 Asia/Shanghai
+ARVEN Warranty ceremonial beautify tip — 2026-11-04 Asia/Shanghai
 
-src.tgz sha256: 5084247d01cc6ba9784b6910a1507f84d2fe31a9592acc52ff91512ed528184f
-BUNDLE_BASE (parts): a87ad818f6ca420c563c52400f031af860d63b1f
-Tip SHA (i.sh pin): e9cf24c04c00fcafb21ffd741f1a1e806461472c
+src.tgz sha256: f6cdea52fb6e6c40686746ccb0ae345bd9cdf944bcf4f698ec76e021ebf077a5
+SoT commit: 40fb266 style(warranty): ceremonial hero/steps/side panel; concrete placeholders
+Parts: p00-p29 (30) + manifest
 
-Fixes:
-- Home About teaser: brand card, accent eyebrow, circular emblem polish
-- aboutBody: remove 法律主体 / Legal entity / Rechtsträger / Entité / Entidad / Podmiot / Subjekt / Entidade / Entità labels; keep company name naturally
+Fix:
+- /support/warranty: hero (trail-gear.webp) + 3 steps + side panel + form card
+- Concrete placeholders (no bare "-" / "…")
+- KEEP-DB scp+compose on prod; staging Vercel
 
-VPS: scp + docker compose build/up KEEP-DB (no wipe).
+BUNDLE_BASE (parts): 5ba7c1f7f5718680a04b4c0071db7ffe0f37bf7c
+Tip SHA (i.sh pin): TIP_SHA_PENDING
+
+Oneliner:
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/TIP_SHA_PENDING/i.sh | bash
