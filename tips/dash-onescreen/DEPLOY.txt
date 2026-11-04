@@ -1,0 +1,18 @@
+ARVEN admin dashboard onescreen tip — 2026-11-05 Asia/Shanghai
+
+SoT: /workspace/arven-recovered @ eec432f (includes e8bb4c5 seed-notice removal)
+
+Change:
+- Remove dashboard seed/demo visitor notice tip (footerNote + refresh Button)
+- Fit analytics dashboard to ~1280x800 one viewport (max-height:820 media query)
+- install.sh DONE echo has no demo credentials / passwords
+
+Live VPS: KEEP-DB overlay + docker compose build/up --no-deps app (no volume wipe).
+No Vercel creates.
+
+BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
+Tip SHA (i.sh pin): 7d169a0da574ed63b11b9b2b7da30b80bccf2ca6
+overlay.tgz sha256: 2bb6da48f2a12e5767a1667e5364882ccca06ce6c2f1bef5d1d4bca96df8d053
+src.tgz sha256: 8f88368bca5ec2959e1a78baae661470b53864445e621740acba17bbd30ef0d6
+
+No passwords in this tip.
