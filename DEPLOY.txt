@@ -2,7 +2,6 @@ ARVEN about+contact+newsletter tip — 2026-11-04 Asia/Shanghai
 
 src.tgz sha256: 86186d052fc7c24a9518b05eb9ae9d0c48cceda33771393ef887281c180dd102
 Parts: see bundle/manifest.txt (22 parts)
-BUNDLE_BASE (parts): 89af21d3e5f432a0cf675d55ab0508917a3be12c
 
 Fixes:
 - Homepage About mid typography clamp(1.125–1.35rem); home_about KEEP-DB patch (6c)
@@ -13,4 +12,8 @@ Fixes:
 
 Live VPS already redeployed via scp+docker compose build/up (KEEP-DB).
 
-Tip SHA (i.sh pin): pending
+Tip SHA (i.sh pin): 10a3dbe98bcb0c95fcc43c8960941321de555fa0
+BUNDLE_BASE (parts): 89af21d3e5f432a0cf675d55ab0508917a3be12c
+
+Oneliner:
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/10a3dbe98bcb0c95fcc43c8960941321de555fa0/i.sh | bash
