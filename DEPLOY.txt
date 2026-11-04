@@ -12,6 +12,6 @@ Live VPS: KEEP-DB overlay + docker compose build/up (no volume wipe).
 Staging: Vercel arven-trade-site target=staging.
 
 BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
-Tip SHA (i.sh pin): 5baa93eef39dbfe90abe27bf018099018de652b9
+Tip SHA (i.sh pin): 7d169a0da574ed63b11b9b2b7da30b80bccf2ca6
 
 No passwords in this tip.
