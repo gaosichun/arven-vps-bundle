@@ -1,16 +1,17 @@
-ARVEN Warranty ceremonial beautify tip — 2026-11-04 Asia/Shanghai
+ARVEN admin dashboard onescreen tip — 2026-11-05 Asia/Shanghai
 
-src.tgz sha256: f6cdea52fb6e6c40686746ccb0ae345bd9cdf944bcf4f698ec76e021ebf077a5
-SoT commit: 40fb266 style(warranty): ceremonial hero/steps/side panel; concrete placeholders
-Parts: p00-p29 (30) + manifest
+SoT: /workspace/arven-recovered @ a3f7517 (includes eec432f dash onescreen + tip-notice removal)
+src.tgz sha256: 8f88368bca5ec2959e1a78baae661470b53864445e621740acba17bbd30ef0d6
 
-Fix:
-- /support/warranty: hero (trail-gear.webp) + 3 steps + side panel + form card
-- Concrete placeholders (no bare "-" / "…")
-- KEEP-DB scp+compose on prod; staging Vercel
+Change:
+- Remove dashboard seed/demo visitor notice tip (footerNote + refresh Button)
+- Fit analytics dashboard to ~1280x800 one viewport (max-height:820 media query)
+- install.sh DONE echo has no demo credentials / passwords
 
-BUNDLE_BASE (parts): 5ba7c1f7f5718680a04b4c0071db7ffe0f37bf7c
-Tip SHA (i.sh pin): 7644a26cea67355fcba247051e02b46f8e4e1a96
+Live VPS: KEEP-DB overlay + docker compose build/up (no volume wipe).
+Staging: Vercel arven-trade-site target=staging.
 
-Oneliner:
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/7644a26cea67355fcba247051e02b46f8e4e1a96/i.sh | bash
+BUNDLE_BASE (parts): d473ae69aa287136c42450df7ca1c520ca624560
+Tip SHA (i.sh pin): 50900d3a3a5ec8fcf02549616c3523aff2441dcf
+
+No passwords in this tip.
