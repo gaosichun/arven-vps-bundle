@@ -10,7 +10,7 @@ Fix:
 - KEEP-DB scp+compose on prod; staging Vercel
 
 BUNDLE_BASE (parts): 5ba7c1f7f5718680a04b4c0071db7ffe0f37bf7c
-Tip SHA (i.sh pin): TIP_SHA_PENDING
+Tip SHA (i.sh pin): 7644a26cea67355fcba247051e02b46f8e4e1a96
 
 Oneliner:
-  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/TIP_SHA_PENDING/i.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/7644a26cea67355fcba247051e02b46f8e4e1a96/i.sh | bash
