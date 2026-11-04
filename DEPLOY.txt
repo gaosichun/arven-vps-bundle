@@ -1,0 +1,16 @@
+ARVEN about+contact+newsletter tip — 2026-11-04 Asia/Shanghai
+
+src.tgz sha256: 86186d052fc7c24a9518b05eb9ae9d0c48cceda33771393ef887281c180dd102
+Parts: see bundle/manifest.txt (22 parts)
+BUNDLE_BASE (parts): 89af21d3e5f432a0cf675d55ab0508917a3be12c
+
+Fixes:
+- Homepage About mid typography clamp(1.125–1.35rem); home_about KEEP-DB patch (6c)
+- Removed IN THE FIELD homepage section
+- Contact Message optional (no asterisk / no client required)
+- Newsletter sourcePage = full pathname+search; admin 来源页 shows full path
+- install.sh KEEP-DB 6b home-card + 6c home-about
+
+Live VPS already redeployed via scp+docker compose build/up (KEEP-DB).
+
+Tip SHA (i.sh pin): pending

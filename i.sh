@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/276611b8d8ff3ed95d4f96cf9202ed9f2358d67f}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/89af21d3e5f432a0cf675d55ab0508917a3be12c}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
@@ -64,6 +64,12 @@ fi
 # KEEP-DB data patch: homepage PRODUCT LINES → product covers (idempotent)
 log "6b/7 Patch homepage category homeCardProductId"
 docker compose run --rm --no-deps -T -u root app node scripts/patch-home-card-products.mjs || echo "WARN: home-card patch failed (non-fatal)"
+# KEEP-DB data patch: homepage About intro copy (en/zh + i18n)
+log "6c/7 Patch homepage home_about PageContent"
+docker compose run --rm --no-deps -T -u root app node scripts/patch-home-about.mjs || echo "WARN: home-about patch failed (non-fatal)"
+# KEEP-DB data patch: About page manufacturer copy (replace outdoor-trade/B2B/RFQ)
+echo "[install] patch about manufacturer copy..."
+docker compose run --rm --no-deps -T -u root app node scripts/patch-about-manufacturer.mjs || echo "WARN: about-manufacturer patch failed (non-fatal)"
 
 log "7/7 Start app + Caddy (HTTPS)"
 docker compose up -d
