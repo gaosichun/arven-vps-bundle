@@ -2,7 +2,7 @@
 # ARVEN production installer for Ubuntu VPS (run as root). Idempotent: safe to re-run.
 #   curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/main/i.sh | bash
 set -euo pipefail
-BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/d473ae69aa287136c42450df7ca1c520ca624560}"
+BUNDLE_BASE="${BUNDLE_BASE:-https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/b9e6860b87db63661e783b56074640cf424eb2c4}"
 APP_DIR=/opt/arven-app
 DEP=$APP_DIR/deploy/vps
 log(){ echo -e "\n\033[1;32m==> $*\033[0m"; }
@@ -15,11 +15,11 @@ systemctl enable --now docker >/dev/null 2>&1 || true
 
 log "2/7 Download source bundle"
 TMP=$(mktemp -d)
-curl -fsSL "$BUNDLE_BASE/bundle/manifest.txt" -o "$TMP/manifest.txt"
+curl -fsSL "$BUNDLE_BASE/bundle-vu/manifest.txt" -o "$TMP/manifest.txt"
 : > "$TMP/b64"
 while read -r part sha; do
   [ -z "$part" ] && continue
-  curl -fsSL "$BUNDLE_BASE/bundle/$part" >> "$TMP/b64"
+  curl -fsSL "$BUNDLE_BASE/bundle-vu/$part" >> "$TMP/b64"
 done < <(grep -v '^sha256 ' "$TMP/manifest.txt")
 base64 -d "$TMP/b64" > "$TMP/src.tgz"
 want=$(awk '/^sha256 /{print $2}' "$TMP/manifest.txt")

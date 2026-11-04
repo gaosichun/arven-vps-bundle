@@ -1,0 +1,22 @@
+ARVEN site search FAQ + How-to Videos tip — 2026-11-04/05 Asia/Shanghai
+
+src.tgz sha256: 8ed11eab5ee5280791b27c22128cfd623f9132d4e8546f74fe1ed30e07083e11
+SoT commit: 5dd8ba7 feat(search): include FAQ + How-to Videos in site search
+Overlay md5: see FILES.md5 (site-search.ts / search-copy.ts / search/page.tsx / icons.tsx)
+
+Fix:
+- searchSite includes published FaqItem + HowToVideo
+- /[locale]/search groups: Products, News, Downloads, FAQ, How-to Videos
+- Overlay/page placeholders updated across locales
+- KEEP-DB scp+compose on prod; staging Vercel then production; no passwords in DONE
+
+BUNDLE_BASE (parts): b9e6860b87db63661e783b56074640cf424eb2c4 (bundle-vu — includes search FAQ files)
+Tip SHA (i.sh pin): (fill after gh push)
+
+Oneliner:
+  curl -fsSL https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/<TIP_SHA>/i.sh | BUNDLE_BASE=https://raw.githubusercontent.com/gaosichun/arven-vps-bundle/b9e6860b87db63661e783b56074640cf424eb2c4 bash
+
+KEEP-DB overlay (preferred on live prod):
+  scp FILES → /opt/arven-app/src/...
+  cd /opt/arven-app/deploy/vps && docker compose build app && docker compose up -d --no-deps app
+  # Admin count must stay >0; never FORCE_IMPORT
